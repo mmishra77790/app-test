@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Load Food Truck DataSet</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!<script type="text/javascript" src="scripts/jquery-2.1.3.js"></script>>
+  <script type="text/javascript" src="scripts/jquery-3.3.1.js"></script>
+  <script src="scripts/jsencrypt.min.js"></script>
+  <script type="text/javascript" src="scripts/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="scripts/dataTables.bootstrap.js"></script>
+  <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+  <script type="text/javascript" src="scripts/jquery.csv-0.71.min.js"></script>
+  <script type="text/javascript" src="scripts/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="scripts/responsive.bootstrap.min.js"></script>
+  <script type="text/javascript" src="scripts/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="scripts/jszip.min.js"></script>
+  <script type="text/javascript" src="scripts/pdfmake.min.js"></script>
+  <script type="text/javascript" src="scripts/vfs_fonts.js"></script>
+  <script type="text/javascript" src="scripts/buttons.html5.min.js"></script>
+  <script type="text/javascript" src="scripts/dataTables.colReorder.min.js"></script>
+  <script type="text/javascript" src="scripts/buttons.colVis.min.js"></script>
+  
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/result-light.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="css/buttons.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="css/responsive.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="css/responsive.bootstrap.min.css">
+  
+  
+  <style id="compiled-css" type="text/css"></style>
+
+</head>
+<body>
+	
+    <div class="container table-responsive" style="font-size: 10px; overflow-x: auto;">
+	<input id="change" type="button" class="button" value="LoadMap" />
+	<input id="refreshPage" type="button" class="button" value="Refresh" /><br/>
+    <table id="example" class="table table-striped table-bordered display nowrap" cellspacing="0" width="100%" style="width:100%"></table>
+    <input type="file" class="button" id="fileinput" />
+    
+</div>
+
+  <script type="text/javascript">//<![CDATA[
+
+
+var table = $('#example').DataTable({
+    columns: [{
+        "title": "Applicant",
+        "data": "Applicant"
+    }, {
+        "title": "LocationDescription",
+        "data": "LocationDescription"
+    }, {
+        "title": "Address",
+        "data": "Address"
+    }, {
+        "title": "Latitude",
+        "data": "Latitude"
+    }, {
+        "title": "Longitude",
+        "data": "Longitude"
+    }],
+	"aLengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+    "iDisplayLength": 5,
+	"scrollX":        '150vh',
+	"scrollY":        '150vh',
+    "scrollCollapse": true,
+	"autoWidth": true,  
+	"columnDefs": [
+        { "width": "150px", "targets": [0,1] },       
+        { "width": "40px", "targets": [4] }
+      ],
+	'processing': true,
+    'language': {
+        'loadingRecords': '&nbsp;',
+        'processing': 'Loading...'
+    },   
+	'dom': 'Rlfrtip',
+	colReorder: true,
+	responsive: {
+        details: {
+            type:'column',
+            display: $.fn.dataTable.Responsive.display.modal( {
+                header: function ( row ) {
+                    var data = row.data();
+                    return 'Details:';
+                }
+            } ),
+            renderer: function ( api, rowIdx, columns ) {
+                var data = $.map( columns, function ( col, i ) {
+                    return '<tr>'+
+                            '<td>'+col.title+':'+'</td> '+
+                            '<td>'+col.data+'</td>'+
+                        '</tr>';
+                } ).join('');
+
+                return $('<table width="100%"/>').append( data );
+            }
+        }
+    },
+	dom: 'Blfrtip',
+		colReorder: true,
+        buttons: [
+			'colvis',
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+   ],
+   orderCellsTop: true,
+   fixedHeader: true,
+});
+$("#fileinput").on("change", function(evt) {
+    var f = evt.target.files[0];
+	if (f) {
+        var r = new FileReader();
+        r.onload = function(e) {
+		    table.rows.add($.csv.toObjects(e.target.result)).draw();
+        }
+        r.readAsText(f);
+    } else {
+        alert("Failed to load file");
+    }
+});
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "ptezLo3g"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+	
+	
+	$(function() {
+	
+
+	
+		var myTable = $('#example').DataTable();
+
+		$('#change').on('click', function () {
+			
+			
+		});
+		
+		$('#refreshPage').click(function() {
+			location.reload();
+		});
+      });
+	  
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+server:
+  port : 8087
+app:
+  foodTruckFileName: food-truck.csv
+  foofTruckLivePath: https://data.sfgov.org/api/views/afxi-4xqj/rows.csv?accessType=DOWNLOAD
+
